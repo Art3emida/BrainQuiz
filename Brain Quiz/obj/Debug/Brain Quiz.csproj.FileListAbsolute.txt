@@ -1,0 +1,12 @@
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\bin\Debug\Brain Quiz.exe.config
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\bin\Debug\Brain Quiz.exe
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\bin\Debug\Brain Quiz.pdb
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\obj\Debug\Brain Quiz.csprojAssemblyReference.cache
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\obj\Debug\Brain_Quiz.Properties.Resources.resources
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\obj\Debug\Brain Quiz.csproj.GenerateResource.cache
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\obj\Debug\Brain Quiz.csproj.CoreCompileInputs.cache
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\obj\Debug\Brain Quiz.exe
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\obj\Debug\Brain Quiz.pdb
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\obj\Debug\Brain_Quiz.Game.resources
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\obj\Debug\Brain_Quiz.HelpScreen.resources
+C:\Users\Veronica\source\repos\Brain Quiz\Brain Quiz\obj\Debug\Brain_Quiz.MainMenu.resources
