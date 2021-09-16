@@ -14,13 +14,13 @@ namespace Brain_Quiz
     public partial class Game : Form
     {
         private MainMenu mainWnd;
-        private int correctAnswer;
+        private string questionsFile = "Brain Quiz.quiz"; // файл с базой вопросов
+        private const int secondsLimit = 30; // лимит времени на один вопрос
         private int score;
         private int percentage;
         private int totalQuestions;
-        private int currentQuestion = 1;
-        private const int secondsLimit = 30;
-        private string questionsFile = "Brain Quiz.quiz";
+        private int correctAnswer;
+        private int currentQuestion = 0;
         private DateTime currentQuestionTime;
         private List<Question> QuestionsList;
 
@@ -36,11 +36,12 @@ namespace Brain_Quiz
                 wnd.HideThemes();
                 return;
             }
-            LoadQuestionsFromFile(theme); // загружаем вопросы из нашего файла
-            SelectQuestion(currentQuestion); // выбираем первый вопрос
+            LoadQuestionsFromFile(theme); // сразу загружаем вопросы из нашего файла
+            NextQuestion(); // и выбираем первый вопрос
         }
 
-        void LoadQuestionsFromFile(string theme) // загрузка вопросов из файла (БД)  и помещение их в массив 
+        // Загрузка вопросов из файла (БД)
+        void LoadQuestionsFromFile(string theme)
         {
             string fileText = File.ReadAllText(questionsFile);
 
@@ -61,9 +62,11 @@ namespace Brain_Quiz
             totalQuestions = QuestionsList.Count;
         }
 
-        void SelectQuestion(int questionNumber)
+        // Выбор следующего вопроса
+        void NextQuestion()
         {
-            if (questionNumber > totalQuestions)
+            currentQuestion++;
+            if (currentQuestion > totalQuestions)
             {
                 percentage = (int)Math.Round((double)(score * 100) / totalQuestions);
                 MessageBox.Show(
@@ -78,7 +81,7 @@ namespace Brain_Quiz
                 return;
             }
 
-            groupBox1.Text = "Вопрос #" + questionNumber + "/" + totalQuestions;
+            groupBox1.Text = "Вопрос #" + currentQuestion + "/" + totalQuestions;
 
             Random rnd = new Random();
             int randIndex = rnd.Next(0, QuestionsList.Count);
@@ -99,9 +102,10 @@ namespace Brain_Quiz
             QuestionTimer.Enabled = true;
         }
 
+        // Клик по варианту ответа
         private void ChosenQuestion(object sender, EventArgs e)
         {
-            var ButtonObj = (Button)sender; // кастинг из object в button
+            var ButtonObj = (Button)sender;
             int ButtonTag = Convert.ToInt32(ButtonObj.Tag);
 
             if (ButtonTag == correctAnswer)
@@ -109,17 +113,17 @@ namespace Brain_Quiz
                 score++;
             }
 
-            currentQuestion++;
-           
-            SelectQuestion(currentQuestion);
+            NextQuestion();
         }
 
+        // При закрытии окна возвращаемся в главное меню
         private void OnWindowClose(object sender, FormClosingEventArgs e)
         {
             mainWnd.Show();
             mainWnd.HideThemes();
         }
 
+        // Коллбэк на ежесекундный тик таймера
         private void QuestionTimerTick(object sender, EventArgs e)
         {
             TimeSpan ExecuteTime = DateTime.Now - currentQuestionTime;
@@ -129,8 +133,7 @@ namespace Brain_Quiz
             {
                 TimeLeft.Text = "0";
                 QuestionTimer.Enabled = false;
-                currentQuestion++;
-                SelectQuestion(currentQuestion);
+                NextQuestion();
                 return;
             }
             TimeLeft.Text = diff.ToString();
